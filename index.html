@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PARAG MART | Fashion Store</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#f7f7f7;
+  color:#171717;
+}
+
+header{
+  background:#111;
+  color:#fff;
+  padding:14px 5%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.logo{
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+
+.logo span{
+  color:#f5b400;
+}
+
+.cart-btn{
+  background:#f5b400;
+  color:#111;
+  border:0;
+  padding:10px 17px;
+  border-radius:25px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.hero{
+  min-height:440px;
+  display:flex;
+  align-items:center;
+  padding:60px 7%;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.9),rgba(0,0,0,.25)),
+    url("https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1600&q=80")
+    center/cover;
+  color:white;
+}
+
+.hero-content{
+  max-width:650px;
+}
+
+.hero h1{
+  font-size:56px;
+  margin-bottom:15px;
+}
+
+.hero h1 span{
+  color:#f5b400;
+}
+
+.hero p{
+  font-size:19px;
+  line-height:1.7;
+  margin-bottom:25px;
+}
+
+.primary-btn{
+  background:#f5b400;
+  border:0;
+  padding:14px 28px;
+  border-radius:30px;
+  font-weight:bold;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.search{
+  background:#fff;
+  padding:22px 5%;
+  text-align:center;
+}
+
+.search input{
+  width:95%;
+  max-width:650px;
+  padding:14px 20px;
+  border:1px solid #ddd;
+  border-radius:30px;
+  outline:none;
+  font-size:16px;
+}
+
+.categories{
+  padding:35px 5%;
+  text-align:center;
+}
+
+.categories h2,
+.products-section h2{
+  font-size:30px;
+  margin-bottom:22px;
+}
+
+.category-buttons button{
+  background:white;
+  border:1px solid #222;
+  padding:10px 20px;
+  border-radius:25px;
+  margin:5px;
+  cursor:pointer;
+}
+
+.category-buttons button:hover{
+  background:#111;
+  color:white;
+}
+
+.products-section{
+  padding:10px 5% 60px;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:22px;
+}
+
+.product{
+  background:white;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 3px 15px rgba(0,0,0,.10);
+  transition:.25s;
+}
+
+.product:hover{
+  transform:translateY(-5px);
+}
+
+.product img{
+  width:100%;
+  height:270px;
+  object-fit:cover;
+  display:block;
+}
+
+.product-info{
+  padding:16px;
+}
+
+.product-info h3{
+  margin-bottom:8px;
+}
+
+.rating{
+  font-size:14px;
+  margin-bottom:8px;
+}
+
+.price{
+  font-size:21px;
+  font-weight:bold;
+}
+
+.old-price{
+  color:#888;
+  text-decoration:line-through;
+  font-size:14px;
+  margin-left:5px;
+}
+
+.add-btn,
+.buy-btn{
+  width:100%;
+  border:0;
+  padding:11px;
+  border-radius:8px;
+  margin-top:10px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.add-btn{
+  background:#111;
+  color:white;
+}
+
+.buy-btn{
+  background:#f5b400;
+  color:#111;
+}
+
+.about{
+  background:#111;
+  color:white;
+  text-align:center;
+  padding:55px 8%;
+}
+
+.about h2{
+  margin-bottom:15px;
+  font-size:32px;
+}
+
+.about p{
+  max-width:800px;
+  margin:auto;
+  line-height:1.8;
+  color:#ddd;
+}
+
+.contact{
+  background:#fff;
+  text-align:center;
+  padding:45px 5%;
+}
+
+.whatsapp{
+  display:inline-block;
+  background:#25D366;
+  color:white;
+  text-decoration:none;
+  padding:14px 25px;
+  border-radius:30px;
+  font-weight:bold;
+  margin-top:15px;
+}
+
+footer{
+  background:#111;
+  color:#aaa;
+  text-align:center;
+  padding:20px;
+}
+
+.cart-panel{
+  position:fixed;
+  right:-430px;
+  top:0;
+  width:390px;
+  max-width:100%;
+  height:100%;
+  background:white;
+  z-index:2000;
+  padding:25px;
+  box-shadow:-5px 0 20px rgba(0,0,0,.25);
+  transition:.3s;
+  overflow-y:auto;
+}
+
+.cart-panel.active{
+  right:0;
+}
+
+.close{
+  float:right;
+  font-size:25px;
+  cursor:pointer;
+}
+
+.cart-item{
+  border-bottom:1px solid #ddd;
+  padding:15px 0;
+}
+
+.qty{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin-top:8px;
+}
+
+.qty button{
+  width:30px;
+  height:30px;
+  border:0;
+  background:#111;
+  color:white;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.remove{
+  margin-top:7px;
+  border:0;
+  background:#eee;
+  padding:6px 10px;
+  cursor:pointer;
+}
+
+.total{
+  font-size:22px;
+  font-weight:bold;
+  margin-top:20px;
+}
+
+.order-form{
+  margin-top:20px;
+}
+
+.order-form input,
+.order-form textarea{
+  width:100%;
+  padding:12px;
+  margin:7px 0;
+  border:1px solid #ddd;
+  border-radius:8px;
+}
+
+.order-btn{
+  width:100%;
+  background:#25D366;
+  color:white;
+  border:0;
+  padding:14px;
+  border-radius:8px;
+  margin-top:10px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+@media(max-width:600px){
+
+  .hero{
+    min-height:400px;
+    padding:50px 6%;
+  }
+
+  .hero h1{
+    font-size:40px;
+  }
+
+  .hero p{
+    font-size:17px;
+  }
+
+  .products{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+
+  .product img{
+    height:210px;
+  }
+
+  .product-info{
+    padding:11px;
+  }
+
+  .product-info h3{
+    font-size:15px;
+  }
+
+  .price{
+    font-size:18px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">PARAG <span>MART</span></div>
+
+  <button class="cart-btn" onclick="openCart()">
+    🛒 Cart <span id="cartCount">0</span>
+  </button>
+</header>
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <h1>Fashion at <span>PARAG MART</span></h1>
+
+    <p>
+      पुरुषों, महिलाओं और बच्चों के लिए
+      ट्रेंडिंग फैशन, बेहतरीन क्वालिटी और शानदार कीमत।
+    </p>
+
+    <button class="primary-btn" onclick="goProducts()">
+      Shop Now
+    </button>
+
+  </div>
+
+</section>
+
+<section class="search">
+
+  <input
+    id="search"
+    type="text"
+    placeholder="🔎 Product खोजें..."
+    onkeyup="searchProducts()"
+  >
+
+</section>
+
+<section class="categories">
+
+  <h2>Shop By Category</h2>
+
+  <div class="category-buttons">
+
+    <button onclick="filterProducts('all')">All</button>
+    <button onclick="filterProducts('men')">Men</button>
+    <button onclick="filterProducts('women')">Women</button>
+    <button onclick="filterProducts('kids')">Kids</button>
+
+  </div>
+
+</section>
+
+<section class="products-section" id="productsSection">
+
+<h2>🔥 Trending Products</h2>
+
+<div class="products" id="products">
+
+<!-- PRODUCT 1 -->
+
+<div class="product"
+data-category="men"
+data-name="Men T Shirt">
+
+<img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=80">
+
+<div class="product-info">
+
+<h3>Premium Men T-Shirt</h3>
+
+<div class="rating">⭐⭐⭐⭐⭐</div>
+
+<div class="price">
+₹399
+<span class="old-price">₹599</span>
+</div>
+
+<button class="add-btn"
+onclick="addToCart('Premium Men T-Shirt',399)">
+🛒 Add to Cart
+</button>
+
+<button class="buy-btn"
+onclick="buyNow('Premium Men T-Shirt',399)">
+⚡ Buy Now
+</button>
+
+</div>
+</div>
+
+
+<!-- PRODUCT 2 -->
+
+<div class="product"
+data-category="men"
+data-name="Men Shirt">
+
+<img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=600&q=80">
+
+<div class="product-info">
+
+<h3>Premium Men Shirt</h3>
+
+<div class="rating">⭐⭐⭐⭐⭐</div>
+
+<div class="price">
+₹699
+<span class="old-price">₹999</span>
+</div>
+
+<button class="add-btn"
+onclick="addToCart('Premium Men Shirt',699)">
+🛒 Add to Cart
+</button>
+
+<button class="buy-btn"
+onclick="buyNow('Premium Men Shirt',699)">
+⚡ Buy Now
+</button>
+
+</div>
+</div>
+
+
+<!-- PRODUCT 3 -->
+
+<div class="product"
+data-category="women"
+data-name="Women Dress">
+
+<img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=600&q=80">
+
+<div class="product-info">
+
+<h3>Women Fashion Dress</h3>
+
+<div class="rating">⭐⭐⭐⭐⭐</div>
+
+<div class="price">
+₹899
+<span class="old-price">₹1299</span>
+</div>
+
+<button class="add-btn"
+onclick="addToCart('Women Fashion Dress',899)">
+🛒 Add to Cart
+</button>
+
+<button class="buy-btn"
+onclick="buyNow('Women Fashion Dress',899)">
+⚡ Buy Now
+</button>
+
+</div>
+</div>
+
+
+<!-- PRODUCT 4 -->
+
+<div class="product"
+data-category="women"
+data-name="Kurti">
+
+<img src="https://images.unsplash.com/photo-1583391733956-6c78276477e2?auto=format&fit=crop&w=600&q=80">
+
+<div class="product-info">
+
+<h3>Designer Kurti</h3>
+
+<div class="rating">⭐⭐⭐⭐⭐</div>
+
+<div class="price">
+₹599
+<span class="old-price">₹799</span>
+</div>
+
+<button class="add-btn"
+onclick="addToCart('Designer Kurti',599)">
+🛒 Add to Cart
+</button>
+
+<button class="buy-btn"
+onclick="buyNow('Designer Kurti',599)">
+⚡ Buy Now
+</button>
+
+</div>
+</div>
+
+
+<!-- PRODUCT 5 -->
+
+<div class="product"
+data-category="kids"
+data-name="Kids Dress">
+
+<img src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=600&q=80">
+
+<div class="product-info">
+
+<h3>Kids Fashion Dress</h3>
+
+<div class="rating">⭐⭐⭐⭐⭐</div>
+
+<div class="price">
+₹499
+<span class="old-price">₹699</span>
+</div>
+
+<button class="add-btn"
+onclick="addToCart('Kids Fashion Dress',499)">
+🛒 Add to Cart
+</button>
+
+<button class="buy-btn"
+onclick="buyNow('Kids Fashion Dress',499)">
+⚡ Buy Now
+</button>
+
+</div>
+</div>
+
+
+<!-- PRODUCT 6 -->
+
+<div class="product"
+data-category="kids"
+data-name="Kids T Shirt">
+
+<img src="https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?auto=format&fit=crop&w=600&q=80">
+
+<div class="product-info">
+
+<h3>Kids T-Shirt</h3>
+
+<div class="rating">⭐⭐⭐⭐⭐</div>
+
+<div class="price">
+₹299
+<span class="old-price">₹399</span>
+</div>
+
+<button class="add-btn"
+onclick="addToCart('Kids T-Shirt',299)">
+🛒 Add to Cart
+</button>
+
+<button class="buy-btn"
+onclick="buyNow('Kids T-Shirt',299)">
+⚡ Buy Now
+</button>
+
+</div>
+</div>
+
+</div>
+</section>
+
+<section class="about">
+
+<h2>About PARAG MART</h2>
+
+<p>
+PARAG MART आपका अपना फैशन स्टोर है, जहाँ आपको
+Men, Women और Kids के लिए फैशनेबल कपड़े
+बेहतरीन क्वालिटी और उचित कीमत पर मिलते हैं।
+</p>
+
+</section>
+
+<section class="contact">
+
+<h2>📞 Contact PARAG MART</h2>
+
+<p>📍 Basantpur, Gonda, Uttar Pradesh</p>
+
+<a
+class="whatsapp"
+href="https://wa.me/917307957133"
+target="_blank">
+
+💬 WhatsApp पर सीधे संपर्क करें
+
+</a>
+
+</section>
+
+<footer>
+
+© 2026 PARAG MART
+<br>
+Fashion • Quality • Trust
+
+</footer>
+
+
+<!-- CART -->
+
+<div class="cart-panel" id="cartPanel">
+
+<span class="close" onclick="closeCart()">✕</span>
+
+<h2>🛒 Your Cart</h2>
+
+<div id="cartItems"></div>
+
+<div class="total">
+Total: ₹<span id="cartTotal">0</span>
+</div>
+
+
+<div class="order-form">
+
+<h3>Customer Details</h3>
+
+<input
+id="customerName"
+placeholder="आपका नाम">
+
+<input
+id="customerPhone"
+placeholder="Mobile Number"
+type="tel">
+
+<textarea
+id="customerAddress"
+placeholder="पूरा Delivery Address"
+rows="4"></textarea>
+
+<button
+class="order-btn"
+onclick="orderWhatsApp()">
+
+📲 WhatsApp पर Order भेजें
+
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+let cart=[];
+
+
+/* ADD TO CART */
+
+function addToCart(name,price){
+
+  let existing =
+  cart.find(item=>item.name===name);
+
+  if(existing){
+
+    existing.qty++;
+
+  }else{
+
+    cart.push({
+      name:name,
+      price:price,
+      qty:1
+    });
+
+  }
+
+  updateCart();
+
+  openCart();
+
+}
+
+
+/* BUY NOW */
+
+function buyNow(name,price){
+
+  cart=[];
+
+  cart.push({
+    name:name,
+    price:price,
+    qty:1
+  });
+
+  updateCart();
+
+  openCart();
+
+}
+
+
+/* UPDATE CART */
+
+function updateCart(){
+
+  let items =
+  document.getElementById("cartItems");
+
+  items.innerHTML="";
+
+  let total=0;
+  let count=0;
+
+  cart.forEach((item,index)=>{
+
+    total += item.price * item.qty;
+
+    count += item.qty;
+
+    items.innerHTML += `
+
+      <div class="cart-item">
+
+        <b>${item.name}</b>
+
+        <br>
+
+        ₹${item.price}
+
+        <div class="qty">
+
+          <button onclick="changeQty(${index},-1)">
+            −
+          </button>
+
+          <span>${item.qty}</span>
+
+          <button onclick="changeQty(${index},1)">
+            +
+          </button>
+
+        </div>
+
+        <button
+        class="remove"
+        onclick="removeItem(${index})">
+
+        Remove
+
+        </button>
+
+      </div>
+
+    `;
+
+  });
+
+  document.getElementById("cartTotal").innerText=total;
+
+  document.getElementById("cartCount").innerText=count;
+
+}
+
+
+/* CHANGE QUANTITY */
+
+function changeQty(index,value){
+
+  cart[index].qty += value;
+
+  if(cart[index].qty<=0){
+
+    cart.splice(index,1);
+
+  }
+
+  updateCart();
+
+}
+
+
+/* REMOVE */
+
+function removeItem(index){
+
+  cart.splice(index,1);
+
+  updateCart();
+
+}
+
+
+/* CART OPEN */
+
+function openCart(){
+
+  document
+  .getElementById("cartPanel")
+  .classList.add("active");
+
+}
+
+
+/* CART CLOSE */
+
+function closeCart(){
+
+  document
+  .getElementById("cartPanel")
+  .classList.remove("active");
+
+}
+
+
+/* PRODUCTS */
+
+function goProducts(){
+
+  document
+  .getElementById("productsSection")
+  .scrollIntoView({
+    behavior:"smooth"
+  });
+
+}
+
+
+/* CATEGORY */
+
+function filterProducts(category){
+
+  let products =
+  document.querySelectorAll(".product");
+
+  products.forEach(product=>{
+
+    if(
+      category==="all" ||
+      product.dataset.category===category
+    ){
+
+      product.style.display="block";
+
+    }else{
+
+      product.style.display="none";
+
+    }
+
+  });
+
+}
+
+
+/* SEARCH */
+
+function searchProducts(){
+
+  let value =
+  document
+  .getElementById("search")
+  .value
+  .toLowerCase();
+
+  let products =
+  document.querySelectorAll(".product");
+
+  products.forEach(product=>{
+
+    let name =
+    product.dataset.name.toLowerCase();
+
+    if(name.includes(value)){
+
+      product.style.display="block";
+
+    }else{
+
+      product.style.display="none";
+
+    }
+
+  });
+
+}
+
+
+/* WHATSAPP ORDER */
+
+function orderWhatsApp(){
+
+  if(cart.length===0){
+
+    alert("Cart खाली है।");
+
+    return;
+
+  }
+
+
+  let name =
+  document
+  .getElementById("customerName")
+  .value.trim();
+
+  let phone =
+  document
+  .getElementById("customerPhone")
+  .value.trim();
+
+  let address =
+  document
+  .getElementById("customerAddress")
+  .value.trim();
+
+
+  if(!name || !phone || !address){
+
+    alert("कृपया Name, Mobile और Address भरें।");
+
+    return;
+
+  }
+
+
+  let message =
+  "🛍️ *PARAG MART ORDER*%0A%0A";
+
+  message +=
+  "👤 Name: "+name+"%0A";
+
+  message +=
+  "📞 Mobile: "+phone+"%0A";
+
+  message +=
+  "📍 Address: "+address+"%0A%0A";
+
+  message +=
+  "🛒 *Products:*%0A";
+
+
+  let total=0;
+
+
+  cart.forEach(item=>{
+
+    let amount =
+    item.price * item.qty;
+
+    total += amount;
+
+    message +=
+    "• "+item.name+
+    " × "+item.qty+
+    " = ₹"+amount+"%0A";
+
+  });
+
+
+  message +=
+  "%0A💰 *Total: ₹"+total+"*";
+
+
+  let whatsapp =
+  "917307957133";
+
+
+  window.open(
+    "https://wa.me/"+
+    whatsapp+
+    "?text="+
+    message,
+    "_blank"
+  );
+
+}
+
+</script>
+
+</body>
+</html>
